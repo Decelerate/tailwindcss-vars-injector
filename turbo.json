@@ -20,6 +20,14 @@
       "dotEnv": [
         ".env"
       ]
+    },
+    "packages/lib": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     }
   }
 }

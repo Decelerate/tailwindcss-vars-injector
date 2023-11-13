@@ -1,5 +1,6 @@
 // import { ThemeConfig } from "tailwindcss/types/config";
 // export type ThemeKey = Array<keyof Omit<ThemeConfig, "extend">>;
+import { CSSRuleObject } from "tailwindcss/types/config";
 import { defaultConfig } from "./defaultConfig";
 import { TailwindcssVarsInjectorConfig } from "./types";
 
@@ -11,12 +12,13 @@ export function tailwindcssVarsInjector(
 ) {
   const config = { ...defaultConfig, ...customConfig };
 
-  return function ({ addBase, theme }) {
-    // console.log(theme("colors"));
-    // console.log(flattenColorPalette(theme("colors")));
-
-    console.log(theme("backgroundColor"));
-
+  return function ({
+    addBase,
+    theme,
+  }: {
+    addBase: (base: CSSRuleObject | CSSRuleObject[]) => void;
+    theme: (path: string, defaultValue?: unknown) => any;
+  }) {
     const colorEntries = Object.entries(
       flattenColorPalette(theme("colors"))
     ).map(([key, val]) => [`--${config.prefix}-${key}`, val]);
