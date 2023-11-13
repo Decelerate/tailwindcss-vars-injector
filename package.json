@@ -1,0 +1,21 @@
+{
+  "name": "tailwindcss-vars-injector-repo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "gen": "turbo gen",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "tsconfig": "*",
+    "turbo": "^1.10.16"
+  },
+  "packageManager": "yarn@1.22.19",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
