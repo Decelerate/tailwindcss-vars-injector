@@ -1,0 +1,22 @@
+{
+  "name": "tailwindcss-vars-injector",
+  "version": "0.0.1",
+  "description": "Vars injector for tailwindcss",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "author": "Cotontigeh",
+  "scripts": {
+    "dev": "yarn run build -- --watch",
+    "build": "tsup index.ts --format cjs,esm --dts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.5",
+    "tsconfig": "*",
+    "typescript": "^5.2.2",
+    "tsup": "^7.2.0"
+  },
+  "license": "ISC",
+  "dependencies": {}
+}
