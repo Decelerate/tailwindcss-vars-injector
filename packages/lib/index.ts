@@ -8,7 +8,7 @@ const flattenColorPalette =
   require("tailwindcss/lib/util/flattenColorPalette").default;
 
 export function tailwindcssVarsInjector(
-  customConfig: TailwindcssVarsInjectorConfig
+  customConfig: TailwindcssVarsInjectorConfig,
 ) {
   const config = { ...defaultConfig, ...customConfig };
 
@@ -17,10 +17,10 @@ export function tailwindcssVarsInjector(
     theme,
   }: {
     addBase: (base: CSSRuleObject | CSSRuleObject[]) => void;
-    theme: (path: string, defaultValue?: unknown) => any;
+    theme: (path: string, defaultValue?: unknown) => string;
   }) {
     const colorEntries = Object.entries(
-      flattenColorPalette(theme("colors"))
+      flattenColorPalette(theme("colors")),
     ).map(([key, val]) => [`--${config.prefix}-${key}`, val]);
 
     const blurEntries = Object.entries(theme("blur")).map(([key, val]) => [
@@ -28,7 +28,7 @@ export function tailwindcssVarsInjector(
       val,
     ]);
 
-    let newVars = Object.fromEntries([...colorEntries, ...blurEntries]);
+    const newVars = Object.fromEntries([...colorEntries, ...blurEntries]);
 
     addBase({
       ":root": newVars,
