@@ -1,1 +1,4 @@
 .turbo
+.eslintrc
+.eslintignore
+tsconfig.json
