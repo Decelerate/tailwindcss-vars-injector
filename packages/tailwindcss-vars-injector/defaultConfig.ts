@@ -1,37 +1,5 @@
 import { TailwindcssVarsInjectorConfig } from "./types";
 
-export enum ThemeKeyEnum {
-  "screens" = "screens",
-  "colors" = "colors",
-  "spacing" = "spacing",
-  "backgroundColor" = "backgroundColor",
-  "backgroundImage" = "backgroundImage",
-  "gradientColorStops" = "gradientColorStops",
-  "borderColor" = "borderColor",
-  "borderRadius" = "borderRadius",
-  "borderWidth" = "borderWidth",
-  "boxShadow" = "boxShadow",
-  "fontSize" = "fontSize",
-  "fontWeight" = "fontWeight",
-  "height" = "height",
-  "width" = "width",
-  "minWidth" = "minWidth",
-  "minHeight" = "minHeight",
-  "maxWidth" = "maxWidth",
-  "maxHeight" = "maxHeight",
-  "padding" = "padding",
-  "margin" = "margin",
-  "space" = "space",
-  "letterSpacing" = "letterSpacing",
-  "lineHeight" = "lineHeight",
-  "listStyleType" = "listStyleType",
-  "inset" = "inset",
-  "zIndex" = "zIndex",
-  "fill" = "fill",
-  "stroke" = "stroke",
-  "fontFamily" = "fontFamily",
-}
-
 export const defaultConfig: TailwindcssVarsInjectorConfig = {
   prefix: "tw",
   activeVars: [
