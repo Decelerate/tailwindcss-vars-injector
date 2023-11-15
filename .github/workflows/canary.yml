@@ -1,0 +1,71 @@
+name: Canary Release
+
+on:
+  push:
+    branches:
+      - canary-sample
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Canary Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          token: ${{secrets.GH_PAT}}
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Canary Version
+        run: yarn build
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Canary Version
+        run: |
+          echo "PACKAGE_VERSION_BASE=$(node -p "require('./packages/tailwindcss-vars-injector/package.json').version")" >> $GITHUB_ENV
+          yarn changeset version --snapshot canary
+
+      - name: Edit package.json version
+        run: |
+          node -e "
+            const fs = require('fs');
+            const packageJson = JSON.parse(fs.readFileSync('./packages/tailwindcss-vars-injector/package.json', 'utf8'));
+            packageJson.version = packageJson.version.replace('0.0.0-canary', process.env.PACKAGE_VERSION_BASE + '-canary');
+            fs.writeFileSync('./packages/tailwindcss-vars-injector/package.json', JSON.stringify(packageJson, null, 2));
+          "
+          echo "PACKAGE_VERSION=$(node -p "require('./packages/tailwindcss-vars-injector/package.json').version")" >> $GITHUB_ENV
+        env:
+          PACKAGE_VERSION_BASE: ${{ env.PACKAGE_VERSION_BASE }}
+
+      - name: Publish Canary Version
+        run: yarn changeset publish --tag canary
+
+      - name: Create Release Tag
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        with:
+          tag_name: ${{ env.PACKAGE_VERSION }}
+          release_name: ${{ env.PACKAGE_VERSION }}
+          draft: false
+          prerelease: true
