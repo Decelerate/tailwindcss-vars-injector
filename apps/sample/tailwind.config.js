@@ -1,4 +1,4 @@
-import { tailwindcssVarsInjector } from "tailwindcss-vars-injector";
+import { tailwindcssVarsInjector } from "@decelerate/tailwindcss-vars-injector";
 
 /* eslint-disable */
 /** @type {import('tailwindcss').Config} */
