@@ -1,5 +1,5 @@
 {
-  "name": "tailwindcss-vars-injector",
+  "name": "@decelerate/tailwindcss-vars-injector",
   "version": "0.0.1",
   "description": "Vars injector for tailwindcss",
   "main": "./dist/index.js",
@@ -28,6 +28,6 @@
     "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {}
 }
