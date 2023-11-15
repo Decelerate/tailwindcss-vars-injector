@@ -40,6 +40,6 @@
     "vite": "^4.4.9",
     "vite-tsconfig-paths": "^4.2.1",
     "vitest": "^0.34.6",
-    "tailwindcss-vars-injector": "*"
+    "@decelerate/tailwindcss-vars-injector": "*"
   }
 }

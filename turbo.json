@@ -21,7 +21,7 @@
         ".env"
       ]
     },
-    "packages/lib": {
+    "packages/tailwindcss-vars-injector": {
       "dependsOn": [
         "^build"
       ],
